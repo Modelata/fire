@@ -3,8 +3,10 @@ import { mustache } from './string.helper';
 
 /**
  * Returns the path from a collection mustache path ad a location object.
+ *
  * @param mustachePath Collection mustache path
- * @param location Location object containin path ids and document id or not.
+ * @param idOrLocation id or Location object containin path ids and document id or not.
+ * @returns The path filled with ids
  */
 export function getPath(mustachePath: string, location?: string | Partial<IMFLocation>): string {
   const realLocation = getLocation(location, mustachePath);
@@ -31,6 +33,7 @@ export function getPath(mustachePath: string, location?: string | Partial<IMFLoc
 /**
  * Returns true if the document path is in the same format as the collection path (meaning the document is from this kind of collection)
  * or false if it doesn't
+ *
  * @param mustachePath Collection path
  * @param refPath Document path
  */
@@ -51,8 +54,10 @@ export function isCompatiblePath(mustachePath: string, refPath: string): boolean
 }
 
 /**
- * Return a location object from either unvalued, string id or location object
+ * Return a location object from either unvalued, string id, location object or model
+ *
  * @param idOrLocationOrModel string id or location object
+ * @returns The location built from params
  */
 export function getLocation<M extends IMFModel<M>>(
   idOrLocationOrModel: string | Partial<IMFLocation> | M,
@@ -72,8 +77,12 @@ export function getLocation<M extends IMFModel<M>>(
 }
 
 /**
- * Return a location object from either unvalued, string id or location object
- * @param location string id or location object
+ * Returns a location object from path and mustache path
+ *
+ * @param path the path to convert to a location
+ * @param mustachePath the collectionPath with mustache ids
+ * @param id document id
+ * @returns The location object built from params
  */
 export function getLocationFromPath(path: string, mustachePath: string, id?: string): Partial<IMFLocation> {
   if (path && mustachePath) {
@@ -93,6 +102,13 @@ export function getLocationFromPath(path: string, mustachePath: string, id?: str
   return {};
 }
 
+/**
+ * Returns arrays of elements constituting model path and mustache path
+ *
+ * @param path Model path
+ * @param mustachePath Dao mustache path
+ * @returns an object containing the path splitted and the mustache path splitted too
+ */
 export function getSplittedPath(path: String, mustachePath: string): {
   pathSplitted: string[],
   mustachePathSplitted: string[],
@@ -118,6 +134,13 @@ export function getSplittedPath(path: String, mustachePath: string): {
   };
 }
 
+/**
+ * Returns true if every property of data exists in model. Else, returns false
+ *
+ * @param data Data that will be checked
+ * @param model Model in wich data must fit
+ * @param logInexistingData Optional: display log for property missing in model (default is true)
+ */
 export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, model: M, logInexistingData: boolean = true): boolean {
   for (const key in data) {
     if (!model.hasOwnProperty(key)) {
@@ -131,9 +154,11 @@ export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, mod
 }
 
 /**
-* method used to prepare the data for save
-* @param modelObj the data to save
-*/
+ * method used to prepare the data for save
+ *
+ * @param modelObj the data to save
+ * @returns the object cleaned from properties and methods that will not be saved in database
+ */
 export function getSavableData<M extends IMFModel<M>>(modelObj: M): Partial<M> {
 
   return Object.keys(modelObj)
@@ -157,11 +182,23 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: M): Partial<M> {
 
 }
 
-
+/**
+ * returns list of AuthUser properties
+ *
+ * @param model The model object
+ * @return array of AuthUser properties names
+ */
+export function getAuthUserProperties(model: Object): string[] {
+  return Object.keys(model).filter((key) => {
+    return Reflect.hasMetadata('authUserProperty', model as Object, key);
+  });
+}
 
 /**
  * returns list of file(s) properties
+ *
  * @param model The model object
+ * @return array of file properties names
  */
 export function getFileProperties(model: Object): string[] {
   return Object.keys(model).filter((key) => {
@@ -171,6 +208,7 @@ export function getFileProperties(model: Object): string[] {
 
 /**
  * returns list of subPath in model
+ *
  * @param model The model object
  */
 export function getSubPaths<M extends IMFModel<M>>(model: M): string[] {
@@ -182,7 +220,13 @@ export function getSubPaths<M extends IMFModel<M>>(model: M): string[] {
   }).filter(a => !!a)));
 }
 
-
+/**
+ * Returns main model merged with properties from subModels
+ *
+ * @param mainModel The main model (container)
+ * @param subModels The sub models (where nested data can be found)
+ * @returns The main model merged with all data
+ */
 export function mergeModels<M extends IMFModel<M>>(mainModel: M, subModels: { [subPath: string]: Partial<M> }): M {
   Object.keys(mainModel).forEach((key) => {
     if (
