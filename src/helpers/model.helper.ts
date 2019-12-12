@@ -8,8 +8,8 @@ import { mustache } from './string.helper';
  * @param idOrLocation id or Location object containin path ids and document id or not.
  * @returns The path filled with ids
  */
-export function getPath(mustachePath: string, location?: string | Partial<IMFLocation>): string {
-  const realLocation = getLocation(location, mustachePath);
+export function getPath<M extends IMFModel<M>>(mustachePath: string, location?: string | Partial<IMFLocation>): string {
+  const realLocation = getLocation<M>(location, mustachePath);
 
   if (!(mustachePath && mustachePath.length)) {
     throw new Error('collectionPath must be defined');
@@ -60,15 +60,15 @@ export function isCompatiblePath(mustachePath: string, refPath: string): boolean
  * @returns The location built from params
  */
 export function getLocation<M extends IMFModel<M>>(
-  idOrLocationOrModel: string | Partial<IMFLocation> | M,
-  mustachePath: string
+  idOrLocationOrModel?: string | Partial<IMFLocation> | M,
+  mustachePath?: string
 ): Partial<IMFLocation> {
   if (idOrLocationOrModel) {
     if (typeof idOrLocationOrModel === 'string') {
       return { id: idOrLocationOrModel };
     }
-    if (idOrLocationOrModel.hasOwnProperty('_collectionPath')) {
-      return getLocationFromPath(idOrLocationOrModel._collectionPath, mustachePath, idOrLocationOrModel._id) as IMFLocation;
+    if (idOrLocationOrModel.hasOwnProperty('_collectionPath') && mustachePath) {
+      return getLocationFromPath((idOrLocationOrModel._collectionPath as string), mustachePath, idOrLocationOrModel._id) as IMFLocation;
     }
 
     return idOrLocationOrModel as Partial<IMFLocation>;
@@ -170,7 +170,8 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: M): Partial<M> {
     .reduce(
       (dbObj: Partial<M>, keyp) => {
         const key: keyof M = keyp as keyof M;
-        if (modelObj[key] && modelObj[key].constructor.name === 'Object') {
+        // if (modelObj[key] && modelObj[key].constructor.name === 'Object') {
+        if (modelObj[key] && typeof modelObj[key] === 'object') {
           (dbObj[key] as any) = getSavableData<any>(modelObj[key]);
         } else {
           dbObj[key] = modelObj[key];
