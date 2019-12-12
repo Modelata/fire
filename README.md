@@ -1,0 +1,1 @@
+# @modelata/types-fire

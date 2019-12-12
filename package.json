@@ -1,0 +1,50 @@
+{
+  "name": "@modelata/fire",
+  "version": "3.1.0-1",
+  "description": "Abstract layer for @modelata/*-fire",
+  "main": "lib/angular/index.js",
+  "types": "lib/angular/index.d.ts",
+  "private": false,
+  "scripts": {
+    "delete-lib-folder": "rimraf ./lib",
+    "prebuild": "npm run lint && npm run delete-lib-folder",
+    "build": "npm run build:angular && npm run build:node",
+    "prebuild:angular": "cp-cli ./config/angular.exports.ts ./src/specifics/exports.ts",
+    "build:angular": "tsc -p tsconfig.angular.json",
+    "prebuild:node": "cp-cli ./config/node.exports.ts ./src/specifics/exports.ts",
+    "build:node": "tsc -p tsconfig.node.json",
+    "prepublish": "npm run build",
+    "lint": "tslint -p tsconfig.angular.json -c tslint.json 'src/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Moventes/modelata-types-fire.git"
+  },
+  "keywords": [
+    "modelata",
+    "firebase",
+    "firestore",
+    "types"
+  ],
+  "author": "Moventes",
+  "license": "Beerware",
+  "bugs": {
+    "url": "https://github.com/Moventes/modelata-types-fire/issues"
+  },
+  "homepage": "https://github.com/Moventes/modelata-types-fire#readme",
+  "devDependencies": {
+    "@google-cloud/firestore": "^2.6.0",
+    "cp-cli": "^2.0.0",
+    "rimraf": "^3.0.0",
+    "rxjs": "~6.4.0",
+    "tslint": "5.20.1",
+    "tslint-config-airbnb": "5.11.2",
+    "typescript": "^3.7.2",
+    "firebase": "^7.4.0"
+  },
+  "peerDependencies": {
+    "@google-cloud/firestore": "^2.6.0",
+    "rxjs": "~6.4.0",
+    "firebase": "^7.4.0"
+  }
+}
