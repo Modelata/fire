@@ -1,5 +1,3 @@
-// created from 'create-ts-index'
-
 {
   addNewline: true,
   excludes: [
@@ -12,7 +10,7 @@
   fileExcludePatterns: [],
   fileFirst: false,
   globOptions: {
-    cwd: '/media/data/Projects/modelata-v2/@modelata/fire/src',
+    cwd: './src',
     dot: true,
     nonull: true,
   },
