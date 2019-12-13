@@ -1,5 +1,6 @@
 import { IMFLocation, IMFModel } from '../interfaces';
 import { mustache } from './string.helper';
+import 'reflect-metadata';
 
 /**
  * Returns the path from a collection mustache path ad a location object.
