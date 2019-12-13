@@ -160,7 +160,7 @@ export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, mod
  * @param modelObj the data to save
  * @returns the object cleaned from properties and methods that will not be saved in database
  */
-export function getSavableData<M extends IMFModel<M>>(modelObj: M): Partial<M> {
+export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Partial<M> {
 
   return Object.keys(modelObj)
     .filter(key =>
@@ -173,7 +173,7 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: M): Partial<M> {
         const key: keyof M = keyp as keyof M;
         // if (modelObj[key] && modelObj[key].constructor.name === 'Object') {
         if (modelObj[key] && typeof modelObj[key] === 'object') {
-          (dbObj[key] as any) = getSavableData<any>(modelObj[key]);
+          (dbObj[key] as any) = getSavableData<any>((modelObj[key] as any));
         } else {
           dbObj[key] = modelObj[key];
         }
