@@ -7,6 +7,7 @@ export * from './mf-form-options.interface';
 export * from './mf-get-list-options.interface';
 export * from './mf-get-one-options.interface';
 export * from './mf-location.interface';
+export * from './mf-meta-ref.interface';
 export * from './mf-model.interface';
 export * from './mf-offset.interface';
 export * from './mf-order-by.interface';
