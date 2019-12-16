@@ -64,6 +64,7 @@ export function getLocation<M extends IMFModel<M>>(
   idOrLocationOrModel?: string | Partial<IMFLocation> | M,
   mustachePath?: string
 ): Partial<IMFLocation> {
+  console.log('ModelHelper getLocation', idOrLocationOrModel, mustachePath);
   if (idOrLocationOrModel) {
     if (typeof idOrLocationOrModel === 'string') {
       return { id: idOrLocationOrModel };
