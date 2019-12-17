@@ -1,6 +1,7 @@
 import { IMFLocation, IMFModel } from '../interfaces';
 import { mustache } from './string.helper';
 import 'reflect-metadata';
+import { MFLogger } from '../mf-logger';
 
 /**
  * Returns the path from a collection mustache path ad a location object.
@@ -64,7 +65,7 @@ export function getLocation<M extends IMFModel<M>>(
   idOrLocationOrModel?: string | Partial<IMFLocation> | M,
   mustachePath?: string
 ): Partial<IMFLocation> {
-  console.log('ModelHelper getLocation', idOrLocationOrModel, mustachePath);
+  MFLogger.debugLibrary('ModelHelper getLocation', idOrLocationOrModel, mustachePath);
   if (idOrLocationOrModel) {
     if (typeof idOrLocationOrModel === 'string') {
       return { id: idOrLocationOrModel };
@@ -147,7 +148,7 @@ export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, mod
   for (const key in data) {
     if (!model.hasOwnProperty(key)) {
       if (logInexistingData) {
-        console.error(`try to update/add an attribute that is not defined in the model = ${key}`);
+        MFLogger.error(`try to update/add an attribute that is not defined in the model = ${key}`);
       }
       return false;
     }

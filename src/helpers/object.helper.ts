@@ -1,3 +1,4 @@
+import { MFLogger } from '../mf-logger';
 
 /**
  * creates an hidden property in the given object
@@ -19,7 +20,7 @@ export function createHiddenProperty(obj: { [key: string]: any }, propName: stri
       });
     }
   } else {
-    console.error('you must define an object to set it an hidden property');
+    MFLogger.error('you must define an object to set it an hidden property');
   }
 }
 
