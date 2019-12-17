@@ -1,3 +1,4 @@
+export * from './mf-auth-dao-sync-options.interface';
 export * from './mf-controls-list.interface';
 export * from './mf-dao.interface';
 export * from './mf-delete-options.interface';
@@ -13,6 +14,9 @@ export * from './mf-offset.interface';
 export * from './mf-order-by.interface';
 export * from './mf-save-options.interface';
 export * from './mf-storage-options.interface';
+export * from './mf-sub-doc-by-path.interface';
+export * from './mf-sub-doc-with-path.interface';
 export * from './mf-update-options.interface';
+export * from './mf-user.interface';
 export * from './mf-where.interface';
 export * from './tool-types';
