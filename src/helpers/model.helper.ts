@@ -10,8 +10,8 @@ import { MFLogger } from '../mf-logger';
  * @param idOrLocation id or Location object containin path ids and document id or not.
  * @returns The path filled with ids
  */
-export function getPath<M extends IMFModel<M>>(mustachePath: string, location?: string | Partial<IMFLocation>): string {
-  const realLocation = getLocation<M>(location, mustachePath);
+export function getPath<M extends IMFModel<M>>(mustachePath: string, idOrLocation?: string | Partial<IMFLocation>): string {
+  const realLocation = getLocation<M>(idOrLocation, mustachePath);
 
   if (!(mustachePath && mustachePath.length)) {
     throw new Error('collectionPath must be defined');
@@ -38,6 +38,7 @@ export function getPath<M extends IMFModel<M>>(mustachePath: string, location?: 
  *
  * @param mustachePath Collection path
  * @param refPath Document path
+ * @returns boolean
  */
 export function isCompatiblePath(mustachePath: string, refPath: string): boolean {
   if (mustachePath && refPath) {
@@ -157,7 +158,7 @@ export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, mod
 }
 
 /**
- * method used to prepare the data for save
+ * method used to prepare the data for save removing methods and hidden properties (underscore prefixed).
  *
  * @param modelObj the data to save
  * @returns the object cleaned from properties and methods that will not be saved in database
@@ -187,7 +188,7 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
 }
 
 /**
- * returns list of AuthUser properties
+ * returns list of AuthUser properties defined in the model
  *
  * @param model The model object
  * @return array of AuthUser properties names
@@ -199,7 +200,7 @@ export function getAuthUserProperties(model: Object): string[] {
 }
 
 /**
- * returns list of file(s) properties
+ * returns list of file(s) properties defined in the model
  *
  * @param model The model object
  * @return array of file properties names
@@ -231,7 +232,7 @@ export function getSubPaths<M extends IMFModel<M>>(model: M): string[] {
  * @param subModels The sub models (where nested data can be found)
  * @returns The main model merged with all data
  */
-export function mergeModels<M extends IMFModel<M>>(mainModel: M, subModels: { [subPath: string]: Partial<M> }): M {
+export function mergeModels<M>(mainModel: M, subModels: { [subPath: string]: IMFModel<any> }): M {
   Object.keys(mainModel).forEach((key) => {
     if (
       Reflect.hasMetadata('subDocPath', mainModel, key)

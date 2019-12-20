@@ -2,11 +2,12 @@ import { MFLogger } from '../mf-logger';
 
 /**
  * creates an hidden property in the given object
+ *
  * @param obj the object to create the attribute on
  * @param propName the name of the property
  * @param propVal the value of the property
  */
-export function createHiddenProperty(obj: { [key: string]: any }, propName: string, propVal: any) {
+export function createHiddenProperty(obj: { [key: string]: any }, propName: string, propVal: any): void {
   if (obj) {
     const hiddenPropName = `_${propName}`;
     if (obj.hasOwnProperty(hiddenPropName)) {
