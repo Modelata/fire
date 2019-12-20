@@ -1,13 +1,13 @@
 {
   "name": "@modelata/fire",
-  "version": "3.1.0-1",
+  "version": "3.2.0",
   "description": "Abstract layer for @modelata/*-fire",
   "main": "lib/angular/index.js",
   "types": "lib/angular/index.d.ts",
   "private": false,
   "scripts": {
     "delete-lib-folder": "rimraf ./lib",
-    "prebuild": "npm run lint && npm run delete-lib-folder",
+    "prebuild": "npm run lint && npm run delete-lib-folder && cti create ./src",
     "build": "npm run build:angular && npm run build:node",
     "prebuild:angular": "cp-cli ./config/angular.exports.ts ./src/specifics/exports.ts",
     "build:angular": "tsc -p tsconfig.angular.json",
@@ -35,16 +35,19 @@
   "devDependencies": {
     "@google-cloud/firestore": "^2.6.0",
     "cp-cli": "^2.0.0",
+    "create-ts-index": "^1.12.0",
+    "firebase": "^7.4.0",
     "rimraf": "^3.0.0",
     "rxjs": "~6.4.0",
     "tslint": "5.20.1",
     "tslint-config-airbnb": "5.11.2",
     "typescript": "^3.7.2",
-    "firebase": "^7.4.0"
+    "reflect-metadata": "0.1.13"
   },
   "peerDependencies": {
     "@google-cloud/firestore": "^2.6.0",
     "rxjs": "~6.4.0",
-    "firebase": "^7.4.0"
+    "firebase": "^7.4.0",
+    "reflect-metadata": "0.1.13"
   }
 }

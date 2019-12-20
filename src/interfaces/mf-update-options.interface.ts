@@ -11,6 +11,7 @@ export type IMFDeletePreviousOnUpdateFilesOptions<M extends IMFModel<M>> = {
    * File property : false => the fprevious ile will NOT be deleted if updated
    */[fileAttribute in NonFunctionPropertyNames<M>]?: boolean;
 };
+
 /**
  * Options to pass to update method
  */
