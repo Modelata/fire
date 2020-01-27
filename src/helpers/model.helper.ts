@@ -174,8 +174,8 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
     .reduce(
       (dbObj: Partial<M>, keyp) => {
         const key: keyof M = keyp as keyof M;
-        // if (modelObj[key] && modelObj[key].constructor.name === 'Object') {
-        if (modelObj[key] && typeof modelObj[key] === 'object') {
+        if (modelObj[key] && (modelObj[key] as any).constructor.name === 'Object') {
+          // if (modelObj[key] && typeof modelObj[key] === 'object') {
           (dbObj[key] as any) = getSavableData<any>((modelObj[key] as any));
         } else {
           dbObj[key] = modelObj[key];
