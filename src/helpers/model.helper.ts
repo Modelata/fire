@@ -147,7 +147,7 @@ export function getSplittedPath(path: String, mustachePath: string): {
  */
 export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, model: M, logInexistingData: boolean = true): boolean {
   for (const key in data) {
-    if (!model.hasOwnProperty(key)) {
+    if (typeof model[key] !== 'function' && !model.hasOwnProperty(key)) {
       if (logInexistingData) {
         MFLogger.error(`try to update/add an attribute that is not defined in the model = ${key}`);
       }
