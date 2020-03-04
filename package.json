@@ -42,7 +42,7 @@
     "rxjs": "^6.5.4",
     "tslint": "^6.0.0",
     "tslint-config-airbnb": "^5.11.2",
-    "typescript": "^3.8.3"
+    "typescript": "^3.7.5"
   },
   "peerDependencies": {
     "@google-cloud/firestore": "^3.5.1",
