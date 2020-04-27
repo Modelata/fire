@@ -28,6 +28,11 @@ export interface IMFModel<M> {
   updateDate: Date;
 
   /**
+   * used on soft deletion mode (true if document is deleted)
+   */
+  deleted: boolean;
+
+  /**
    * initializes the instance of the model with the given data and location
    *
    * @param data the data to inject in the instance

@@ -8,6 +8,7 @@ import { IMFUpdateOptions } from './mf-update-options.interface';
 import { IMFModel } from './mf-model.interface';
 import { IMFDeleteOptions } from './mf-delete-options.interface';
 import { MFOmit } from './tool-types';
+import { MFDeleteMode } from '../enums/mf-delete-mode.enum';
 
 /**
  * Service providing every methods to interact with firestore database
@@ -19,6 +20,7 @@ export interface IMFDao<M extends IMFModel<M>> {
    * Collection path with mustache document ids (e.g. lists/{lists}/items)
    */
   mustachePath: string;
+  deletionMode: MFDeleteMode;
 
   /**
    * Get a new instance of model M

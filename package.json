@@ -1,6 +1,6 @@
 {
   "name": "@modelata/fire",
-  "version": "3.2.5",
+  "version": "3.3.0",
   "description": "Abstract layer for @modelata/*-fire",
   "main": "lib/angular/index.js",
   "types": "lib/angular/index.d.ts",
@@ -33,21 +33,21 @@
   },
   "homepage": "https://github.com/Moventes/modelata-types-fire#readme",
   "devDependencies": {
-    "@google-cloud/firestore": "^3.5.1",
+    "@google-cloud/firestore": "^3.7.5",
     "cp-cli": "^2.0.0",
-    "create-ts-index": "^1.12.0",
-    "firebase": "^7.9.3",
+    "create-ts-index": "1.12.0",
+    "firebase": "^7.14.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4",
-    "tslint": "^6.0.0",
+    "rxjs": "^6.5.5",
+    "tslint": "^6.1.2",
     "tslint-config-airbnb": "^5.11.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "@google-cloud/firestore": "^3.5.1",
-    "rxjs": "^6.5.4",
-    "firebase": "^7.9.3",
+    "@google-cloud/firestore": "^3.7.5",
+    "rxjs": "^6.5.5",
+    "firebase": "^7.14.2",
     "reflect-metadata": "^0.1.13"
   }
 }
