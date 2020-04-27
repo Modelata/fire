@@ -1,5 +1,6 @@
 export * from './auth-user-property.decorator';
 export * from './collection-path.decorator';
+export * from './deletion-mode.decorator';
 export * from './enumerable.decorator';
 export * from './get-by-ref.decorator';
 export * from './storage-property.decorator';
