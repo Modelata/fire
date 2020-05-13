@@ -40,4 +40,9 @@ export interface IMFGetListOptions<M> {
    * Request result will be cached in order to get a faster answer on same getList request
    */
   cacheable?: boolean;
+
+  /**
+  * Request result will be deleted in soft deletion mode
+  */
+  includeDeleted?: boolean;
 }
