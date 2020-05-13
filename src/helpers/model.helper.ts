@@ -14,7 +14,7 @@ export function getPath<M extends IMFModel<M>>(mustachePath: string, idOrLocatio
   const realLocation = getLocation<M>(idOrLocation, mustachePath);
 
   if (!(mustachePath && mustachePath.length)) {
-    throw new Error('collectionPath must be defined');
+    throw new Error('@collectionPath() must be defined at the beginning of the DAO service');
   }
   let path = mustache(mustachePath, realLocation);
   if (path.includes('{')) {
@@ -24,7 +24,7 @@ export function getPath<M extends IMFModel<M>>(mustachePath: string, idOrLocatio
     while ((missingId = missingIdRegex.exec(path)) !== null) {
       missingIds.push(missingId[1]);
     }
-    throw new Error(`collectionIds ${missingIds.join(', ')} missing !!!!`);
+    throw new Error(`Failed to fill "${missingIds.join('", ')}" parameter(s) in the path "${mustachePath}" (with the provided location "${idOrLocation}") => please check the location parameter of your query`);
   }
   if (realLocation.id) {
     path += `${path.endsWith('/') ? '' : '/'}${realLocation.id}`;
