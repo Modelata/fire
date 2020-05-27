@@ -169,7 +169,6 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
     .filter(key =>
       !(key as string).startsWith('_') &&
       typeof modelObj[(key as keyof M)] !== 'undefined' &&
-      !(modelObj[(key as keyof M)] == null) &&
       typeof modelObj[(key as keyof M)] !== 'function'
     )
     .reduce(
