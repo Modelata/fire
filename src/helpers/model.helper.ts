@@ -205,9 +205,9 @@ export function getAuthUserProperties(model: Object): string[] {
  * @param model The model object
  * @return array of file properties names
  */
-export function getFileProperties(model: Object): string[] {
-  return Object.keys(model).filter((key) => {
-    return Reflect.hasMetadata('storageProperty', model as Object, key);
+export function getFileProperties<M extends IMFModel<M>>(model: Partial<M>): string[] {
+  return Object.keys(model).filter((key:string) => {
+    return Reflect.hasMetadata('storageProperty', model, key) ||  (model as any)[key]._file instanceof File;
   });
 }
 
