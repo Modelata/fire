@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/Moventes/modelata-types-fire#readme",
   "devDependencies": {
-    "@google-cloud/firestore": "^3.8.0",
+    "@google-cloud/firestore": "^3.8.1",
     "cp-cli": "^2.0.0",
     "create-ts-index": "^1.13.2",
     "firebase": "^7.14.3",
