@@ -275,7 +275,7 @@ export function isHiddenProperty(propertyName: string): boolean {
 }
 
 export function isDaoObject(param: unknown): boolean {
-  if (typeof param === 'object') {
+  if (param && typeof param === 'object') {
     const obj = param as Object;
     return (obj.constructor &&
       (obj.constructor as any).__proto__ &&
