@@ -187,6 +187,26 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
 
 }
 
+
+export function clearNullAttributes<M extends IMFModel<M>>(modelToClear: Partial<M>): Partial<M> {
+  return Object.keys(modelToClear)
+    .filter(key => !(modelToClear[key as keyof M] == null))
+    .reduce((clearedObj: Partial<M>, keyp) => {
+      const key: keyof M = keyp as keyof M;
+      if (
+        modelToClear[key] &&
+        (modelToClear[key] as any).constructor.name === 'Object'
+      ) {
+        (clearedObj[key] as any) = getSavableData<any>(
+          modelToClear[key] as any,
+        );
+      } else {
+        clearedObj[key] = modelToClear[key];
+      }
+      return clearedObj;
+    }, {});
+}
+
 /**
  * returns list of AuthUser properties defined in the model
  *
@@ -205,9 +225,9 @@ export function getAuthUserProperties(model: Object): string[] {
  * @param model The model object
  * @return array of file properties names
  */
-export function getFileProperties(model: Object): string[] {
-  return Object.keys(model).filter((key) => {
-    return Reflect.hasMetadata('storageProperty', model as Object, key);
+export function getFileProperties<M extends IMFModel<M>>(model: Partial<M>): string[] {
+  return Object.keys(model).filter((key: string) => {
+    return Reflect.hasMetadata('storageProperty', model, key) || (model as any)[key] && (model as any)[key]._file instanceof File;
   });
 }
 
@@ -249,3 +269,22 @@ export function mergeModels<M>(mainModel: M, subModels: { [subPath: string]: IMF
   return mainModel;
 }
 
+
+export function isHiddenProperty(propertyName: string): boolean {
+  return !!(propertyName && propertyName.startsWith('_') && propertyName.endsWith('$'));
+}
+
+export function isDaoObject(param: unknown): boolean {
+  if (typeof param === 'object') {
+    const obj = param as Object;
+    return (obj.constructor &&
+      (obj.constructor as any).__proto__ &&
+      (obj.constructor as any).__proto__.name === 'MFDao')
+      ||
+      (obj.hasOwnProperty &&
+        obj.hasOwnProperty('db') &&
+        obj.hasOwnProperty('mustachePath'));
+  } else {
+    return false;
+  }
+}

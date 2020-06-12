@@ -1,6 +1,6 @@
 {
   "name": "@modelata/fire",
-  "version": "3.3.12",
+  "version": "3.3.16",
   "description": "Abstract layer for @modelata/*-fire",
   "main": "lib/angular/index.js",
   "types": "lib/angular/index.d.ts",
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/Moventes/modelata-types-fire#readme",
   "devDependencies": {
-    "@google-cloud/firestore": "^3.8.0",
+    "@google-cloud/firestore": "^3.8.1",
     "cp-cli": "^2.0.0",
     "create-ts-index": "^1.13.2",
     "firebase": "^7.14.3",

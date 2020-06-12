@@ -22,6 +22,17 @@ export class MFLogger {
   }
 
   /**
+   * Displays log if level is warning
+   *
+   * @param args logs
+   */
+  static warn(...args: any[]) {
+    if (MFLogger.loggerLevel >= MFLoggerLevel.WARN) {
+      // tslint:disable-next-line: no-console
+      console.warn(...args);
+    }
+  }
+  /**
    * Displays log if level is at least debug
    *
    * @param args logs

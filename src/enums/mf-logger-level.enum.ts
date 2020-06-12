@@ -4,6 +4,7 @@
 export enum MFLoggerLevel {
   NONE,
   ERROR,
+  WARN,
   DEBUG,
-  DEBUG_LIBRARY
+  DEBUG_LIBRARY,
 }
