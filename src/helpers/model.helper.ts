@@ -167,7 +167,7 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
 
   return Object.keys(modelObj)
     .filter(key =>
-      !(key as string).startsWith('_') &&
+      !isHiddenProperty(key as string) &&
       typeof modelObj[(key as keyof M)] !== 'undefined' &&
       typeof modelObj[(key as keyof M)] !== 'function'
     )
@@ -271,7 +271,7 @@ export function mergeModels<M>(mainModel: M, subModels: { [subPath: string]: IMF
 
 
 export function isHiddenProperty(propertyName: string): boolean {
-  return !!(propertyName && propertyName.startsWith('_') && propertyName.endsWith('$'));
+  return !!(propertyName && propertyName.startsWith('_'));
 }
 
 export function isDaoObject(param: unknown): boolean {
