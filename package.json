@@ -1,6 +1,6 @@
 {
   "name": "@modelata/fire",
-  "version": "3.3.15",
+  "version": "3.3.16",
   "description": "Abstract layer for @modelata/*-fire",
   "main": "lib/angular/index.js",
   "types": "lib/angular/index.d.ts",
