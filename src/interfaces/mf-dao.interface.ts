@@ -57,14 +57,6 @@ export interface IMFDao<M extends IMFModel<M>> {
    */
   getByReference(reference: DocumentReference<M>, options?: IMFGetOneOptions): AsyncType<M>;
 
-  /**
-   * Get a model from database from its path
-   *
-   * @param path String path to the document in database
-   * @param options (withSnapshot, completeOnFirst, cacheable)
-   * @returns asynchronous answer with model
-  */
-  getByPath(path: string, options?: IMFGetOneOptions): AsyncType<M>;
 
   /**
    * Get a list of documents in the collection
