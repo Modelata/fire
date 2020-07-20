@@ -39,5 +39,5 @@ export interface IMFModel<M> {
    * @param mustachePath the mustache path of the collection
    * @param location document id and identifiers to set in mustache path
    */
-  initialize(data: Partial<M>, mustachePath?: string, location?: Partial<IMFLocation>): void;
+  new(data: Partial<M>, mustachePath?: string, location?: Partial<IMFLocation>): IMFModel<M>;
 }
