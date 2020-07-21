@@ -13,11 +13,6 @@ export interface IMFModel<M> {
   _collectionPath: string;
 
   /**
-   * Document snapshot if asked in options
-   */
-  _snapshot: DocumentSnapshot<M>;
-
-  /**
    * Date of creation of the document
    */
   creationDate: Date;
@@ -39,5 +34,5 @@ export interface IMFModel<M> {
    * @param mustachePath the mustache path of the collection
    * @param location document id and identifiers to set in mustache path
    */
-  new(data: Partial<M>, mustachePath?: string, location?: Partial<IMFLocation>): IMFModel<M>;
+  initialize(data: Partial<M>, mustachePath?: string, location?: Partial<IMFLocation>): void;
 }
