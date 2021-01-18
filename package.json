@@ -1,6 +1,6 @@
 {
   "name": "@modelata/fire",
-  "version": "3.3.16",
+  "version": "3.3.17",
   "description": "Abstract layer for @modelata/*-fire",
   "main": "lib/angular/index.js",
   "types": "lib/angular/index.d.ts",
@@ -36,7 +36,6 @@
     "@google-cloud/firestore": "^3.8.1",
     "cp-cli": "^2.0.0",
     "create-ts-index": "^1.13.2",
-    "firebase": "^7.14.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.5",
@@ -47,7 +46,6 @@
   "peerDependencies": {
     "@google-cloud/firestore": "^3.8.0",
     "rxjs": "^6.5.5",
-    "firebase": "^7.14.3",
     "reflect-metadata": "^0.1.13"
   }
 }
