@@ -5,6 +5,7 @@ export declare type OrderByDirection = firestore.OrderByDirection;
 export declare type WhereFilterOp = firestore.WhereFilterOp;
 export declare type DocumentReference<M> = firestore.DocumentReference;
 export declare type CollectionReference<M> = firestore.CollectionReference;
+export declare type DocumentData = firestore.DocumentData;
 export declare type DocumentSnapshot<T> = DocumentSnapshotExists<T> | DocumentSnapshotDoesNotExist;
 export declare type AsyncType<M> = Observable<M>;
 

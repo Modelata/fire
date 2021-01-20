@@ -1,4 +1,4 @@
-import { DocumentData } from '@google-cloud/firestore';
+import { DocumentData } from './../specifics/exports';
 
 export function convertDataFromDb(data: DocumentData): DocumentData {
   if (data) {
