@@ -1,7 +1,6 @@
-import { MFLogger } from '../mf-logger';
-import { firestore } from 'firebase/app';
+import { DocumentData } from './../specifics/exports';
 
-export function convertDataFromDb(data: firestore.DocumentData): firestore.DocumentData {
+export function convertDataFromDb(data: DocumentData): DocumentData {
   if (data) {
     for (const key in data) {
       if (data.hasOwnProperty(key) && data[key]) {
@@ -21,6 +20,7 @@ export function convertDataFromDb(data: firestore.DocumentData): firestore.Docum
   }
   return data;
 }
+
 export function isDocumentReference(data: any): boolean {
   return !!(data && data.id && data.parent && data.path && data.firestore);
 }

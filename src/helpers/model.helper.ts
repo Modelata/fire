@@ -191,20 +191,23 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
 export function clearNullAttributes<M extends IMFModel<M>>(modelToClear: Partial<M>): Partial<M> {
   return Object.keys(modelToClear)
     .filter(key => !(modelToClear[key as keyof M] == null))
-    .reduce((clearedObj: Partial<M>, keyp) => {
-      const key: keyof M = keyp as keyof M;
-      if (
-        modelToClear[key] &&
-        (modelToClear[key] as any).constructor.name === 'Object'
-      ) {
-        (clearedObj[key] as any) = getSavableData<any>(
-          modelToClear[key] as any,
-        );
-      } else {
-        clearedObj[key] = modelToClear[key];
-      }
-      return clearedObj;
-    }, {});
+    .reduce(
+      (clearedObj: Partial<M>, keyp) => {
+        const key: keyof M = keyp as keyof M;
+        if (
+          modelToClear[key] &&
+          (modelToClear[key] as any).constructor.name === 'Object'
+        ) {
+          (clearedObj[key] as any) = getSavableData<any>(
+            modelToClear[key] as any,
+          );
+        } else {
+          clearedObj[key] = modelToClear[key];
+        }
+        return clearedObj;
+      },
+      {},
+    );
 }
 
 /**
@@ -284,7 +287,6 @@ export function isDaoObject(param: unknown): boolean {
       (obj.hasOwnProperty &&
         obj.hasOwnProperty('db') &&
         obj.hasOwnProperty('mustachePath'));
-  } else {
-    return false;
   }
+  return false;
 }
