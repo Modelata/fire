@@ -1,4 +1,4 @@
 export function isDocumentReference(data: any): boolean {
-  return data && data.hasOwnProperty('id') && data.hasOwnProperty('parent') && data.hasOwnProperty('path') && data.hasOwnProperty('firestore');
+  return !!(data && data.id && data.parent && data.path && data.firestore);
 }
 
