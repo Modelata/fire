@@ -33,21 +33,21 @@
   },
   "homepage": "https://github.com/Moventes/modelata-types-fire#readme",
   "devDependencies": {
-    "@google-cloud/firestore": "^3.8.1",
+    "@google-cloud/firestore": "^5.0.2",
     "cp-cli": "^2.0.0",
     "create-ts-index": "^1.13.2",
-    "firebase": "^7.14.3",
+    "firebase": "^9.6.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.5",
+    "rxjs": "^7.5.2",
     "tslint": "^6.1.2",
     "tslint-config-airbnb": "^5.11.2",
-    "typescript": "^3.9.2"
+    "typescript": "^4.5.4"
   },
   "peerDependencies": {
-    "@google-cloud/firestore": "^3.8.0",
-    "rxjs": "^6.5.5",
-    "firebase": "^7.14.3",
-    "reflect-metadata": "^0.1.13"
+    "@google-cloud/firestore": "^5.0.2",
+    "firebase": "^9.6.3",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.2"
   }
 }
