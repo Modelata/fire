@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Moventes/modelata-types-fire.git"
+    "url": "git+ssh://git@github.com/Modelata/types-fire.git"
   },
   "keywords": [
     "modelata",
@@ -29,9 +29,9 @@
   "author": "Moventes",
   "license": "Beerware",
   "bugs": {
-    "url": "https://github.com/Moventes/modelata-types-fire/issues"
+    "url": "https://github.com/Modelata/fire/issues"
   },
-  "homepage": "https://github.com/Moventes/modelata-types-fire#readme",
+  "homepage": "https://github.com/Modelata/fire#readme",
   "devDependencies": {
     "@google-cloud/firestore": "^5.0.2",
     "cp-cli": "^2.0.0",
