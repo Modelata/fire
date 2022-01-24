@@ -14,7 +14,7 @@
     "prebuild:node": "cp-cli ./config/node.exports.ts ./src/specifics/exports.ts",
     "build:node": "tsc -p tsconfig.node.json",
     "prepublish": "npm run build",
-    "lint": "npx eslint 'src/**/*.ts'"
+    "lint": "npx eslint src/**/*.ts"
   },
   "repository": {
     "type": "git",
