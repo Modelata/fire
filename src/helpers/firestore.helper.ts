@@ -3,6 +3,7 @@ import { DocumentData } from './../specifics/exports';
 export function convertDataFromDb(data: DocumentData): DocumentData {
   if (data) {
     for (const key in data) {
+      // eslint-disable-next-line no-prototype-builtins
       if (data.hasOwnProperty(key) && data[key]) {
 
         if (typeof (data[key] as any).toDate === 'function') {
