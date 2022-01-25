@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { IMFLocation, IMFModel } from '../interfaces';
 import { mustache } from './string.helper';
 import 'reflect-metadata';
@@ -113,7 +114,7 @@ export function getLocationFromPath(path: string, mustachePath: string, id?: str
  * @param mustachePath Dao mustache path
  * @returns an object containing the path splitted and the mustache path splitted too
  */
-export function getSplittedPath(path: String, mustachePath: string): {
+export function getSplittedPath(path: string, mustachePath: string): {
   pathSplitted: string[],
   mustachePathSplitted: string[],
 } {
@@ -145,7 +146,7 @@ export function getSplittedPath(path: String, mustachePath: string): {
  * @param model Model in wich data must fit
  * @param logInexistingData Optional: display log for property missing in model (default is true)
  */
-export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, model: M, logInexistingData: boolean = true): boolean {
+export function allDataExistInModel<M extends IMFModel<M>>(data: Partial<M>, model: M, logInexistingData = true): boolean {
   for (const key in data) {
     if (typeof model[key] !== 'function' && !model.hasOwnProperty(key.includes('.') ? key.split('.')[0] : key)) {
       if (logInexistingData) {
@@ -167,7 +168,7 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
 
   return Object.keys(modelObj)
     .filter(key =>
-      !(key as string).startsWith('_') &&
+      !isHiddenProperty(key as string) &&
       typeof modelObj[(key as keyof M)] !== 'undefined' &&
       typeof modelObj[(key as keyof M)] !== 'function'
     )
@@ -191,20 +192,23 @@ export function getSavableData<M extends IMFModel<M>>(modelObj: Partial<M>): Par
 export function clearNullAttributes<M extends IMFModel<M>>(modelToClear: Partial<M>): Partial<M> {
   return Object.keys(modelToClear)
     .filter(key => !(modelToClear[key as keyof M] == null))
-    .reduce((clearedObj: Partial<M>, keyp) => {
-      const key: keyof M = keyp as keyof M;
-      if (
-        modelToClear[key] &&
-        (modelToClear[key] as any).constructor.name === 'Object'
-      ) {
-        (clearedObj[key] as any) = getSavableData<any>(
-          modelToClear[key] as any,
-        );
-      } else {
-        clearedObj[key] = modelToClear[key];
-      }
-      return clearedObj;
-    }, {});
+    .reduce(
+      (clearedObj: Partial<M>, keyp) => {
+        const key: keyof M = keyp as keyof M;
+        if (
+          modelToClear[key] &&
+          (modelToClear[key] as any).constructor.name === 'Object'
+        ) {
+          (clearedObj[key] as any) = getSavableData<any>(
+            modelToClear[key] as any,
+          );
+        } else {
+          clearedObj[key] = modelToClear[key];
+        }
+        return clearedObj;
+      },
+      {},
+    );
 }
 
 /**
@@ -213,8 +217,10 @@ export function clearNullAttributes<M extends IMFModel<M>>(modelToClear: Partial
  * @param model The model object
  * @return array of AuthUser properties names
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function getAuthUserProperties(model: Object): string[] {
   return Object.keys(model).filter((key) => {
+    // eslint-disable-next-line @typescript-eslint/ban-types
     return Reflect.hasMetadata('authUserProperty', model as Object, key);
   });
 }
@@ -260,6 +266,7 @@ export function mergeModels<M>(mainModel: M, subModels: { [subPath: string]: IMF
       const subPath = Reflect.getMetadata('subDocPath', mainModel, key);
       if (
         subModels.hasOwnProperty(subPath) &&
+        // eslint-disable-next-line @typescript-eslint/ban-types
         (subModels[subPath] as Object).hasOwnProperty(key)
       ) {
         (mainModel as any)[key] = (subModels[subPath] as any)[key];
@@ -271,11 +278,12 @@ export function mergeModels<M>(mainModel: M, subModels: { [subPath: string]: IMF
 
 
 export function isHiddenProperty(propertyName: string): boolean {
-  return !!(propertyName && propertyName.startsWith('_') && propertyName.endsWith('$'));
+  return !!(propertyName && propertyName.startsWith('_'));
 }
 
 export function isDaoObject(param: unknown): boolean {
-  if (typeof param === 'object') {
+  if (param && typeof param === 'object') {
+    // eslint-disable-next-line @typescript-eslint/ban-types
     const obj = param as Object;
     return (obj.constructor &&
       (obj.constructor as any).__proto__ &&
@@ -284,7 +292,6 @@ export function isDaoObject(param: unknown): boolean {
       (obj.hasOwnProperty &&
         obj.hasOwnProperty('db') &&
         obj.hasOwnProperty('mustachePath'));
-  } else {
-    return false;
   }
+  return false;
 }

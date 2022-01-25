@@ -1,9 +1,9 @@
-import { MFLogger } from '../mf-logger';
-import { firestore } from 'firebase/app';
+import { DocumentData } from './../specifics/exports';
 
-export function convertDataFromDb(data: firestore.DocumentData): firestore.DocumentData {
+export function convertDataFromDb(data: DocumentData): DocumentData {
   if (data) {
     for (const key in data) {
+      // eslint-disable-next-line no-prototype-builtins
       if (data.hasOwnProperty(key) && data[key]) {
 
         if (typeof (data[key] as any).toDate === 'function') {
@@ -21,7 +21,8 @@ export function convertDataFromDb(data: firestore.DocumentData): firestore.Docum
   }
   return data;
 }
+
 export function isDocumentReference(data: any): boolean {
-  return data && data.hasOwnProperty('id') && data.hasOwnProperty('parent') && data.hasOwnProperty('path') && data.hasOwnProperty('firestore');
+  return !!(data && data.id && data.parent && data.path && data.firestore);
 }
 
