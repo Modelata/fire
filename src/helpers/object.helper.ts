@@ -10,6 +10,7 @@ import { MFLogger } from '../mf-logger';
 export function createHiddenProperty(obj: { [key: string]: any }, propName: string, propVal: any): void {
   if (obj) {
     const hiddenPropName = `_${propName}`;
+    // eslint-disable-next-line no-prototype-builtins
     if (obj.hasOwnProperty(hiddenPropName)) {
       obj[hiddenPropName] = propVal;
     } else {
