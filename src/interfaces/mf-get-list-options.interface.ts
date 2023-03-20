@@ -1,11 +1,12 @@
-import { IMFWhere } from './mf-where.interface';
-import { IMFOrderBy } from './mf-order-by.interface';
+import { DocumentData } from '../specifics/exports';
 import { IMFOffset } from './mf-offset.interface';
+import { IMFOrderBy } from './mf-order-by.interface';
+import { IMFWhere } from './mf-where.interface';
 
 /**
  * Options passed to get list functions
  */
-export interface IMFGetListOptions<M> {
+export interface IMFGetListOptions<M extends DocumentData> {
   /**
    * Documents will include an hidden property containing document snapshote
    */
@@ -42,7 +43,7 @@ export interface IMFGetListOptions<M> {
   cacheable?: boolean;
 
   /**
-  * Request result will be deleted in soft deletion mode
-  */
+   * Request result will be deleted in soft deletion mode
+   */
   includeDeleted?: boolean;
 }

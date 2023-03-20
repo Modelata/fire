@@ -1,7 +1,7 @@
+import { DocumentData, DocumentSnapshot } from '../specifics/exports';
 import { IMFLocation } from './mf-location.interface';
-import { DocumentSnapshot } from '../specifics/exports';
 
-export interface IMFModel<M> {
+export interface IMFModel<M extends DocumentData> {
   /**
    * Document Id
    */
@@ -39,5 +39,9 @@ export interface IMFModel<M> {
    * @param mustachePath the mustache path of the collection
    * @param location document id and identifiers to set in mustache path
    */
-  initialize(data: Partial<M>, mustachePath?: string, location?: Partial<IMFLocation>): void;
+  initialize(
+    data: Partial<M>,
+    mustachePath?: string,
+    location?: Partial<IMFLocation>
+  ): void;
 }

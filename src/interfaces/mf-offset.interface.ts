@@ -1,9 +1,9 @@
-import { DocumentSnapshot } from '../specifics/exports';
+import { DocumentData, DocumentSnapshot } from '../specifics/exports';
 
 /**
  * Offset option value, only one is handled
  */
-export interface IMFOffset<M> {
+export interface IMFOffset<M extends DocumentData> {
   /**
    * First element of the list
    */
