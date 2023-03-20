@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Modelata/types-fire.git"
+    "url": "git+ssh://git@github.com/Modelata/fire.git"
   },
   "keywords": [
     "modelata",
@@ -46,9 +46,9 @@
     "typescript": "^5.0.2"
   },
   "peerDependencies": {
-    "@google-cloud/firestore": "^4.5.0",
-    "firebase": "^9.6.3",
+    "@google-cloud/firestore": "^6.5.0",
+    "firebase": "^9.18.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.5.2"
+    "rxjs": "^7.8.0"
   }
 }
